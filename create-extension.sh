@@ -11,6 +11,12 @@
 #   ./create-extension.sh "Eklenti Adı"            # Doğrudan isim ile
 #   ./create-extension.sh "Eklenti Adı" /path/to   # İsim ve hedef klasör ile
 #   ./create-extension.sh -k /path/to              # Hedef klasörde otomatik isim ile
+#   ./create-extension.sh -e cursor "Eklenti Adı" # Belirtilen editör ile aç
+#   ./create-extension.sh -e code -k /path/to     # VS Code ile aç, otomatik isim
+#
+# Parametreler:
+#   -e <editor>  Projeyi belirtilen editör ile aç (cursor, code, vim, vb.)
+#   -k <path>    Hedef klasörde otomatik isim ile oluştur
 #
 # ============================================
 
@@ -31,16 +37,35 @@ echo ""
 # Parametreleri al
 EXTENSION_NAME=""
 TARGET_DIR=""
+EDITOR_CMD=""
+AUTO_NAME=false
 
-# -k parametresi kontrolü
-if [ "$1" = "-k" ]; then
-    TARGET_DIR="$2"
+# Parametreleri parse et
+while getopts "e:k:" opt; do
+    case $opt in
+        e)
+            EDITOR_CMD="$OPTARG"
+            ;;
+        k)
+            TARGET_DIR="$OPTARG"
+            AUTO_NAME=true
+            ;;
+        \?)
+            echo -e "${RED}Geçersiz parametre: -$OPTARG${NC}" >&2
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+# Kalan argümanları al
+if [ "$AUTO_NAME" = true ]; then
     TIMESTAMP=$(date +%Y%m%d-%H%M%S)
     EXTENSION_NAME="new-extension-$TIMESTAMP"
     echo -e "${YELLOW}Otomatik isim oluşturuldu: ${EXTENSION_NAME}${NC}"
 else
     EXTENSION_NAME="$1"
-    TARGET_DIR="$2"
+    TARGET_DIR="${2:-$TARGET_DIR}"
     
     # Eğer eklenti adı verilmediyse, otomatik isim oluştur
     if [ -z "$EXTENSION_NAME" ]; then
@@ -1547,3 +1572,14 @@ echo ""
 echo -e "${GREEN}İyi vibe coding'ler! 🚀✨${NC}"
 echo ""
 
+# ============================================
+# Editör ile Aç
+# ============================================
+if [ -n "$EDITOR_CMD" ]; then
+    if command -v "$EDITOR_CMD" &> /dev/null; then
+        echo -e "${CYAN}Proje ${EDITOR_CMD} ile açılıyor...${NC}"
+        "$EDITOR_CMD" "$PROJECT_PATH"
+    else
+        echo -e "${RED}Uyarı: '${EDITOR_CMD}' komutu bulunamadı!${NC}"
+    fi
+fi
