@@ -10,6 +10,7 @@
 #   ./create-extension.sh                           # Otomatik isim (new-extension-TIMESTAMP)
 #   ./create-extension.sh "Eklenti Adı"            # Doğrudan isim ile
 #   ./create-extension.sh "Eklenti Adı" /path/to   # İsim ve hedef klasör ile
+#   ./create-extension.sh -k /path/to              # Hedef klasörde otomatik isim ile
 #
 # ============================================
 
@@ -28,14 +29,25 @@ echo -e "${CYAN}╚════════════════════�
 echo ""
 
 # Parametreleri al
-EXTENSION_NAME="$1"
-TARGET_DIR="$2"
+EXTENSION_NAME=""
+TARGET_DIR=""
 
-# Eğer eklenti adı verilmediyse, otomatik isim oluştur
-if [ -z "$EXTENSION_NAME" ]; then
+# -k parametresi kontrolü
+if [ "$1" = "-k" ]; then
+    TARGET_DIR="$2"
     TIMESTAMP=$(date +%Y%m%d-%H%M%S)
     EXTENSION_NAME="new-extension-$TIMESTAMP"
     echo -e "${YELLOW}Otomatik isim oluşturuldu: ${EXTENSION_NAME}${NC}"
+else
+    EXTENSION_NAME="$1"
+    TARGET_DIR="$2"
+    
+    # Eğer eklenti adı verilmediyse, otomatik isim oluştur
+    if [ -z "$EXTENSION_NAME" ]; then
+        TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+        EXTENSION_NAME="new-extension-$TIMESTAMP"
+        echo -e "${YELLOW}Otomatik isim oluşturuldu: ${EXTENSION_NAME}${NC}"
+    fi
 fi
 
 # Klasör adını oluştur (küçük harf, tire ile)
