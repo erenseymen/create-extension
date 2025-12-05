@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Yeni Eklenti Oluştur
+GenericName=Eklenti Oluşturucu
+Comment=Yeni bir eklenti (Chrome/Firefox) projesi oluştur
+Exec=/path/to/create-extension.sh -k /home/user/projects -e cursor
+Icon=application-x-addon
+Terminal=false
+Categories=Development;Utility;
+Keywords=extension;plugin;
+StartupNotify=true

@@ -38,6 +38,17 @@ Otomatik isimle (tarih-saat bazlı):
 ./create-extension.sh "My Awesome Extension" ~/projects/
 ```
 
+### Masaüstü Kısayolu (Linux)
+
+Uygulama başlatıcısından hızlıca proje oluşturmak için `create-extension.desktop` dosyasını kullanabilirsiniz:
+
+1. Dosyayı `~/.local/share/applications/` klasörüne kopyalayın.
+2. `Exec` satırını scriptin tam yolunu içerecek şekilde düzenleyin.
+3. Varsayılan editör ve klasör için parametreleri özelleştirebilirsiniz:
+   ```ini
+   Exec=/path/to/create-extension.sh -k /home/user/projects -e cursor
+   ```
+
 ## Oluşturulan Proje İçeriği
 
 Script çalıştıktan sonra oluşturulan klasörde şunlar bulunur:
