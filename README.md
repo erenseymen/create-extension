@@ -1,4 +1,4 @@
-# Tarayıcı Eklentisi Şablonu Oluşturucu
+# Tarayıcı Eklentisi Projesi Oluşturucu
 
 Bu proje, Chrome ve Firefox için modern (Manifest V3) tarayıcı eklentisi projeleri oluşturmanızı sağlayan bir bash script'idir.
 
