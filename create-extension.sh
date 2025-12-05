@@ -28,11 +28,44 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
 
-echo ""
-echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║${NC}       ${BOLD}Tarayıcı Eklentisi Projesi Oluşturucu${NC}               ${CYAN}║${NC}"
-echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
-echo ""
+show_banner() {
+    echo ""
+    echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${NC}       ${BOLD}Tarayıcı Eklentisi Projesi Oluşturucu${NC}                ${CYAN}║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+}
+
+show_help() {
+    show_banner
+    echo -e "${BOLD}Kullanım:${NC}"
+    echo "  $0 [SEÇENEKLER] [EKLENTİ ADI] [HEDEF KLASÖR]"
+    echo ""
+    echo -e "${BOLD}Açıklama:${NC}"
+    echo "  Bu script, yeni bir tarayıcı eklentisi (Chrome & Firefox) projesi oluşturur."
+    echo "  Manifest V3 uyumlu temel dosya yapısını, ikonları ve paketleme scriptlerini hazırlar."
+    echo ""
+    echo -e "${BOLD}Seçenekler:${NC}"
+    echo -e "  ${GREEN}-h, --help${NC}      Bu yardım mesajını gösterir"
+    echo -e "  ${GREEN}-e <editor>${NC}     Projeyi belirtilen editör ile açar (örn: cursor, code, vim)"
+    echo -e "  ${GREEN}-k <path>${NC}       Belirtilen hedef klasörde otomatik isim ile oluşturur"
+    echo ""
+    echo -e "${BOLD}Örnekler:${NC}"
+    echo "  $0                                    # Otomatik isim (new-extension-TIMESTAMP)"
+    echo "  $0 \"My Extension\"                     # İsim ile oluştur"
+    echo "  $0 \"My Extension\" ~/projects          # İsim ve hedef klasör ile"
+    echo "  $0 -k ~/projects                      # Hedefte otomatik isimle"
+    echo "  $0 -e cursor \"My Extension\"           # Oluştur ve Cursor ile aç"
+    echo ""
+}
+
+# Yardım parametresi kontrolü
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    show_help
+    exit 0
+fi
+
+show_banner
 
 # Parametreleri al
 EXTENSION_NAME=""
@@ -100,7 +133,7 @@ echo ""
 
 # Proje klasörünü oluştur
 mkdir -p "$PROJECT_PATH"
-cd "$PROJECT_PATH"
+cd "$PROJECT_PATH" || exit 1
 
 # Alt klasörleri oluştur
 mkdir -p src
@@ -806,7 +839,7 @@ package_chrome() {
     cp -r src "$TEMP_DIR/"
 
     # ZIP oluştur
-    cd "$TEMP_DIR"
+    cd "$TEMP_DIR" || exit 1
     zip -r "../$ZIP_NAME" . -q
     cd ..
 
@@ -844,7 +877,7 @@ package_firefox() {
     cp -r src "$TEMP_DIR/"
 
     # ZIP oluştur
-    cd "$TEMP_DIR"
+    cd "$TEMP_DIR" || exit 1
     zip -r "../$ZIP_NAME" . -q
     cd ..
 
