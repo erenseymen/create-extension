@@ -7,7 +7,7 @@
 # Chrome ve Firefox için temel dosya yapısını hazırlar.
 #
 # Kullanım:
-#   ./create-extension.sh                           # İnteraktif mod
+#   ./create-extension.sh                           # Otomatik isim (new-extension-TIMESTAMP)
 #   ./create-extension.sh "Eklenti Adı"            # Doğrudan isim ile
 #   ./create-extension.sh "Eklenti Adı" /path/to   # İsim ve hedef klasör ile
 #
@@ -31,15 +31,11 @@ echo ""
 EXTENSION_NAME="$1"
 TARGET_DIR="$2"
 
-# Eğer eklenti adı verilmediyse, kullanıcıdan iste
+# Eğer eklenti adı verilmediyse, otomatik isim oluştur
 if [ -z "$EXTENSION_NAME" ]; then
-    echo -e "${YELLOW}Eklenti adını girin:${NC}"
-    read -p "> " EXTENSION_NAME
-    
-    if [ -z "$EXTENSION_NAME" ]; then
-        echo -e "${RED}Hata: Eklenti adı boş olamaz!${NC}"
-        exit 1
-    fi
+    TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+    EXTENSION_NAME="new-extension-$TIMESTAMP"
+    echo -e "${YELLOW}Otomatik isim oluşturuldu: ${EXTENSION_NAME}${NC}"
 fi
 
 # Klasör adını oluştur (küçük harf, tire ile)
@@ -61,16 +57,6 @@ fi
 echo -e "${GREEN}Eklenti Adı:${NC} $EXTENSION_NAME"
 echo -e "${GREEN}Klasör Adı:${NC} $FOLDER_NAME"
 echo -e "${GREEN}Proje Yolu:${NC} $PROJECT_PATH"
-echo ""
-
-# Kullanıcıdan onay al
-echo -e "${YELLOW}Bu ayarlarla devam edilsin mi? (E/h)${NC}"
-read -p "> " CONFIRM
-if [[ "$CONFIRM" =~ ^[Hh]$ ]]; then
-    echo -e "${YELLOW}İptal edildi.${NC}"
-    exit 0
-fi
-
 echo ""
 echo -e "${CYAN}Proje oluşturuluyor...${NC}"
 echo ""
