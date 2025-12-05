@@ -1094,6 +1094,273 @@ sed -i "s/EXTENSION_NAME_PLACEHOLDER/$EXTENSION_NAME/g" README.md
 sed -i "s/FOLDER_NAME_PLACEHOLDER/$FOLDER_NAME/g" README.md
 
 # ============================================
+# CHROME_WEB_STORE_GUIDE.md
+# ============================================
+cat > CHROME_WEB_STORE_GUIDE.md << 'CHROME_GUIDE_EOF'
+# Chrome Web Store Yayınlama Rehberi
+
+Bu rehber, **EXTENSION_NAME_PLACEHOLDER** eklentisini Chrome Web Store'a yayınlamak için gereken adımları içerir.
+
+## Ön Hazırlık
+
+### 1. Gerekli Dosyalar Kontrolü
+
+✅ **Tamamlanması Gerekenler:**
+- [x] `manifest.json` - Manifest V3 formatında
+- [x] İkonlar (16x16, 48x48, 128x128) - Mevcut
+- [ ] Gizlilik Politikası - Hazırlanmalı
+- [ ] Store listing için ekran görüntüleri (1280x800 veya 640x400)
+- [ ] Promosyon görseli (440x280) - Opsiyonel ama önerilir
+- [ ] Küçük promosyon görseli (920x680) - Opsiyonel ama önerilir
+
+### 2. Manifest.json Kontrolü
+
+Manifest dosyanız Chrome Web Store gereksinimlerini karşılıyor:
+- ✅ Manifest V3
+- ✅ İsim, versiyon, açıklama mevcut
+- ✅ İkonlar tanımlı
+- ✅ Permissions ve host_permissions tanımlı
+
+**Önerilen İyileştirmeler:**
+- `homepage_url` eklenebilir (GitHub repository linki)
+- `author` alanı eklenebilir
+
+## Adım 1: Chrome Web Store Developer Dashboard'a Erişim
+
+1. [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) adresine gidin
+2. Google hesabınızla giriş yapın
+3. **$5 tek seferlik kayıt ücreti** ödemeniz gerekecek (henüz ödemediyseniz)
+
+## Adım 2: Yeni Eklenti Oluşturma
+
+1. Dashboard'da **"Yeni öğe"** (New Item) butonuna tıklayın
+2. ZIP dosyanızı yükleyin (aşağıdaki "Paketleme" bölümüne bakın)
+3. Eklenti yüklendikten sonra store listing bilgilerini doldurun
+
+## Adım 3: Store Listing Bilgileri
+
+### Zorunlu Alanlar:
+
+#### 1. **Dil ve Bölge**
+- **Varsayılan Dil:** Türkçe (tr) veya İngilizce (en)
+- **Bölgeler:** Hedef bölgeler (veya "Tüm bölgeler")
+
+#### 2. **Açıklama**
+Eklentinizin ne yaptığını net bir şekilde açıklayın.
+
+```
+EXTENSION_NAME_PLACEHOLDER açıklaması...
+
+Özellikler:
+- Özellik 1
+- Özellik 2
+- Özellik 3
+```
+
+#### 3. **Kategori**
+- **Birincil Kategori:** Eklentinize uygun kategoriyi seçin (örn: Productivity, Developer Tools)
+
+#### 4. **Görseller**
+- **Ekran Görüntüleri:** En az 1, en fazla 5 adet
+  - Boyut: 1280x800 veya 640x400 piksel
+  - Format: PNG veya JPEG
+  - İçerik: Eklentinin kullanımını gösteren ekran görüntüleri
+
+#### 5. **Gizlilik Politikası**
+- Gizlilik politikası URL'si gerekli
+- GitHub Pages veya benzeri bir serviste yayınlayın
+- `PRIVACY_POLICY.md` dosyasını oluşturup kullanabilirsiniz
+
+#### 6. **Promosyon Görselleri** (Opsiyonel ama önerilir)
+- Küçük: 440x280 piksel
+- Büyük: 920x680 piksel
+
+## Adım 4: Gizlilik ve Güvenlik
+
+### Veri Kullanımı Bildirimi
+
+Chrome Web Store, eklentinizin veri kullanımını soracak.
+
+**Kullanıcı verileri topluyor musunuz?**
+- Eğer uzak sunucuya veri gönderiyorsanız veya local storage kullanıyorsanız durumu belirtin.
+
+### İnceleme Sürecinde Sorulacak Sorular
+
+**1. Single Purpose Description**
+Eklentinin tek bir amacı olduğunu açıklayın.
+
+**2. Permission Justification**
+Manifest dosyasındaki her izin için (storage, host_permissions vb.) neden gerekli olduğunu açıklayın.
+
+Örnek:
+- `storage`: Kullanıcı ayarlarını kaydetmek için.
+- `host_permissions`: Hedef sitede çalışmak için.
+
+## Adım 5: Paketleme
+
+### ZIP Dosyası Oluşturma
+
+Terminal'de proje dizininde şu komutu çalıştırın veya `package.sh` scriptini kullanın:
+
+```bash
+./package.sh chrome
+```
+
+Bu komut `FOLDER_NAME_PLACEHOLDER-vX.X-chrome.zip` dosyasını oluşturacaktır.
+
+## Adım 6: İnceleme Süreci
+
+1. Tüm bilgileri doldurduktan sonra **"Değişiklikleri Kaydet"** butonuna tıklayın
+2. **"İncelemeye Gönder"** butonuna tıklayın
+3. İnceleme süreci genellikle **1-3 iş günü** sürer
+
+## Yararlı Linkler
+
+- [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
+- [Program Policies](https://developer.chrome.com/docs/webstore/program-policies/)
+- [Manifest V3 Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)
+CHROME_GUIDE_EOF
+
+sed -i "s/EXTENSION_NAME_PLACEHOLDER/$EXTENSION_NAME/g" CHROME_WEB_STORE_GUIDE.md
+sed -i "s/FOLDER_NAME_PLACEHOLDER/$FOLDER_NAME/g" CHROME_WEB_STORE_GUIDE.md
+
+# ============================================
+# FIREFOX_ADDON_GUIDE.md
+# ============================================
+cat > FIREFOX_ADDON_GUIDE.md << 'FIREFOX_GUIDE_EOF'
+# Firefox Add-ons Yayınlama Rehberi
+
+Bu rehber, **EXTENSION_NAME_PLACEHOLDER** eklentisini Firefox Add-ons'a (AMO) yayınlamak için adım adım talimatları içerir.
+
+## Ön Hazırlık
+
+### 1. Firefox Developer Hub Hesabı
+
+1. [Firefox Add-on Developer Hub](https://addons.mozilla.org/developers/)'a gidin
+2. Firefox hesabınızla giriş yapın veya yeni hesap oluşturun
+3. Geliştirici sözleşmesini kabul edin
+
+### 2. Paket Oluşturma
+
+Terminal'de proje dizininde şu komutu çalıştırın:
+
+```bash
+./package.sh firefox
+```
+
+Bu komut `FOLDER_NAME_PLACEHOLDER-vX.X-firefox.zip` dosyasını oluşturacaktır.
+
+## Add-on Gönderimi
+
+### Adım 1: Yeni Add-on Başlatma
+
+1. [Submit a New Add-on](https://addons.mozilla.org/developers/addon/submit/distribution) sayfasına gidin
+2. **"On this site"** seçeneğini seçin (AMO'da dağıtım için)
+3. **"Continue"** butonuna tıklayın
+
+### Adım 2: Dosya Yükleme
+
+1. Oluşturduğunuz ZIP dosyasını yükleyin
+2. Kaynak kod (source code) istenmesi durumunda:
+   - Eğer kodunuz obfuscate edilmemişse (okunabilirse) kaynak kod yüklemek zorunda değilsiniz
+   - Eğer minified/obfuscated kod varsa kaynak kodu ZIP olarak yüklemelisiniz
+
+### Adım 3: Add-on Detayları
+
+#### Temel Bilgiler
+- **Name:** EXTENSION_NAME_PLACEHOLDER
+- **Summary:** Eklentinin kısa özeti
+- **Categories:** Uygun kategorileri seçin
+
+#### Açıklama (Description)
+Eklentinin detaylı açıklaması, özellikleri ve kullanım talimatları.
+
+#### İkon ve Görseller
+- **İkon:** 128x128 PNG (Mevcut: `icons/icon128.png`)
+- **Ekran Görüntüleri:** En az 1 adet (Önerilen: 1280x800)
+
+### Adım 4: Teknik Bilgiler
+
+#### İzinler Açıklaması
+Firefox bazen izinlerin neden gerekli olduğunu sorabilir.
+- `storage`: Ayarlar için
+- `host_permissions`: Site içeriğine erişim için
+
+### Adım 5: Gönderim
+
+1. Bilgileri kontrol edin
+2. **"Submit Version"** butonuna tıklayın
+
+## İnceleme Süreci
+
+- İlk inceleme: 1-5 iş günü
+- Güncellemeler: Genellikle 24 saat içinde
+
+## Güncelleme Yayınlama
+
+1. `manifest.json` ve `manifest.firefox.json` içinde versiyonu artırın
+2. `./package.sh firefox` ile yeni paket oluşturun
+3. [My Add-ons](https://addons.mozilla.org/developers/addons) sayfasından "Upload New Version" deyin
+
+## Faydalı Linkler
+
+- [Firefox Extension Workshop](https://extensionworkshop.com/)
+- [Add-on Policies](https://extensionworkshop.com/documentation/publish/add-on-policies/)
+FIREFOX_GUIDE_EOF
+
+sed -i "s/EXTENSION_NAME_PLACEHOLDER/$EXTENSION_NAME/g" FIREFOX_ADDON_GUIDE.md
+sed -i "s/FOLDER_NAME_PLACEHOLDER/$FOLDER_NAME/g" FIREFOX_ADDON_GUIDE.md
+
+# ============================================
+# SUBMISSION_CHECKLIST.md
+# ============================================
+cat > SUBMISSION_CHECKLIST.md << 'CHECKLIST_EOF'
+# Yayınlama Kontrol Listesi
+
+## ✅ Hazır Olanlar
+
+- [x] Manifest dosyaları (Chrome & Firefox)
+- [x] Temel ikonlar (16, 48, 128 px)
+- [x] Paketleme scripti (`package.sh`)
+
+## ⚠️ Yapılması Gerekenler
+
+### 1. Dokümantasyon ve Politika
+- [ ] **Gizlilik Politikası**: `PRIVACY_POLICY.md` dosyasını oluşturun ve bir URL'de yayınlayın (GitHub Pages vb.)
+- [ ] **Lisans**: Projenize uygun bir lisans dosyası ekleyin (MIT, Apache vb.)
+
+### 2. Görsel Varlıklar
+- [ ] **Ekran Görüntüleri**:
+  - Boyut: 1280x800px veya 640x400px
+  - Format: PNG/JPEG
+  - En az 1 adet, eklentiyi tanıtan görsel
+- [ ] **Promosyon Görselleri** (Chrome Store için önerilir):
+  - Küçük: 440x280px
+  - Büyük: 920x680px
+
+### 3. Mağaza Bilgileri
+- [ ] Eklenti **Açıklaması** (Kısa ve Uzun)
+- [ ] **Kategori** seçimi
+- [ ] **Dil** ayarları
+
+### 4. Hesaplar
+- [ ] **Chrome Web Store**: Developer hesabı ($5)
+- [ ] **Firefox Add-ons**: Developer hesabı (Ücretsiz)
+
+### 5. Son Kontroller
+- [ ] Tüm `console.log`'ları temizleyin veya development moduna alın
+- [ ] Manifest versiyon numarasını kontrol edin
+- [ ] Eklentiyi "Load Unpacked" ile son kez test edin
+- [ ] `./package.sh` ile temiz paket oluşturun
+
+## 🚀 Yayınlama Adımları
+
+1. **Paketle**: `./package.sh` komutunu çalıştır
+2. **Chrome**: `CHROME_WEB_STORE_GUIDE.md` adımlarını izle
+3. **Firefox**: `FIREFOX_ADDON_GUIDE.md` adımlarını izle
+CHECKLIST_EOF
+
+# ============================================
 # Placeholder icon oluştur (basit bir metin dosyası)
 # ============================================
 echo -e "${YELLOW}Not: icons/ klasörüne 128x128 PNG icon eklemeyi unutmayın!${NC}"
