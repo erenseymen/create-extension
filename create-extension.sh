@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================
-# Tarayıcı Eklentisi Oluşturucu
+# Tarayıcı Eklentisi Şablonu Oluşturucu
 # ============================================
 # Bu script, yeni bir tarayıcı eklentisi projesi oluşturur.
 # Chrome ve Firefox için temel dosya yapısını hazırlar.
@@ -23,7 +23,7 @@ NC='\033[0m' # No Color
 
 echo ""
 echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}║${NC}       ${BOLD}Tarayıcı Eklentisi Oluşturucu${NC}               ${CYAN}║${NC}"
+echo -e "${CYAN}║${NC}       ${BOLD}Tarayıcı Eklentisi Şablonu Oluşturucu${NC}               ${CYAN}║${NC}"
 echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
