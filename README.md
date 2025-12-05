@@ -1,4 +1,4 @@
-# Browser Extension Generator
+# Tarayıcı Eklentisi Oluşturucu
 
 Bu proje, Chrome ve Firefox için modern (Manifest V3) tarayıcı eklentisi projeleri oluşturmanızı sağlayan bir bash script'idir.
 
