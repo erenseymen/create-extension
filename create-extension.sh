@@ -1020,7 +1020,7 @@ GITIGNORE_EOF
 cat > README.md << 'README_EOF'
 # EXTENSION_NAME_PLACEHOLDER
 
-Eklenti açıklaması buraya yazılacak.
+Eklenti açıklaması buraya yazılacak. Store listing bilgileri için `STORE_LISTING.md` dosyasına bakın.
 
 ## Özellikler
 
@@ -1064,7 +1064,9 @@ FOLDER_NAME_PLACEHOLDER/
 │   └── icon128.png
 ├── package.sh             # Paketleme scripti
 ├── generate-icons.sh      # İkon oluşturma scripti
-└── README.md
+├── README.md
+├── STORE_LISTING.md       # Mağaza listeleme bilgileri
+└── CHROME_WEB_STORE_GUIDE.md / FIREFOX_ADDON_GUIDE.md
 ```
 
 ### Paketleme
@@ -1146,7 +1148,7 @@ Manifest dosyanız Chrome Web Store gereksinimlerini karşılıyor:
 - **Bölgeler:** Hedef bölgeler (veya "Tüm bölgeler")
 
 #### 2. **Açıklama**
-Eklentinizin ne yaptığını net bir şekilde açıklayın.
+Eklentinizin ne yaptığını net bir şekilde açıklayın. `STORE_LISTING.md` dosyasındaki "Description" bölümünü kullanabilirsiniz.
 
 ```
 EXTENSION_NAME_PLACEHOLDER açıklaması...
@@ -1156,6 +1158,8 @@ EXTENSION_NAME_PLACEHOLDER açıklaması...
 - Özellik 2
 - Özellik 3
 ```
+
+**Not:** `STORE_LISTING.md` dosyasını düzenleyerek store listing bilgilerinizi hazırlayabilirsiniz.
 
 #### 3. **Kategori**
 - **Birincil Kategori:** Eklentinize uygun kategoriyi seçin (örn: Productivity, Developer Tools)
@@ -1269,11 +1273,11 @@ Bu komut `FOLDER_NAME_PLACEHOLDER-vX.X-firefox.zip` dosyasını oluşturacaktır
 
 #### Temel Bilgiler
 - **Name:** EXTENSION_NAME_PLACEHOLDER
-- **Summary:** Eklentinin kısa özeti
+- **Summary:** `STORE_LISTING.md` dosyasındaki "Summary" bölümünü kullanın
 - **Categories:** Uygun kategorileri seçin
 
 #### Açıklama (Description)
-Eklentinin detaylı açıklaması, özellikleri ve kullanım talimatları.
+`STORE_LISTING.md` dosyasındaki "Description" bölümünü kullanın. Eklentinin detaylı açıklaması, özellikleri ve kullanım talimatları burada yer almalı.
 
 #### İkon ve Görseller
 - **İkon:** 128x128 PNG (Mevcut: `icons/icon128.png`)
@@ -1312,6 +1316,46 @@ sed -i "s/EXTENSION_NAME_PLACEHOLDER/$EXTENSION_NAME/g" FIREFOX_ADDON_GUIDE.md
 sed -i "s/FOLDER_NAME_PLACEHOLDER/$FOLDER_NAME/g" FIREFOX_ADDON_GUIDE.md
 
 # ============================================
+# STORE_LISTING.md - Mağaza listeleme bilgileri
+# ============================================
+cat > STORE_LISTING.md << 'STORE_LISTING_EOF'
+# Title:
+
+EXTENSION_NAME_PLACEHOLDER
+
+# Summary (Kısa Açıklama):
+
+Eklentinizin kısa açıklaması buraya yazılacak (132 karakter sınırı - Chrome Web Store).
+
+# Description (Tam Açıklama):
+
+Eklentinizin detaylı açıklaması buraya yazılacak. Chrome Web Store ve Firefox Add-ons için kullanılacak.
+
+Özellikler:
+- Özellik 1
+- Özellik 2
+- Özellik 3
+
+## Nasıl Kullanılır
+
+1. Adım 1
+2. Adım 2
+3. Adım 3
+
+## Gereksinimler
+
+- Gereksinim 1 (varsa)
+- Gereksinim 2 (varsa)
+
+## Notlar
+
+- Önemli notlar buraya yazılabilir
+STORE_LISTING_EOF
+
+# Placeholder'ları değiştir
+sed -i "s/EXTENSION_NAME_PLACEHOLDER/$EXTENSION_NAME/g" STORE_LISTING.md
+
+# ============================================
 # SUBMISSION_CHECKLIST.md
 # ============================================
 cat > SUBMISSION_CHECKLIST.md << 'CHECKLIST_EOF'
@@ -1339,7 +1383,8 @@ cat > SUBMISSION_CHECKLIST.md << 'CHECKLIST_EOF'
   - Büyük: 920x680px
 
 ### 3. Mağaza Bilgileri
-- [ ] Eklenti **Açıklaması** (Kısa ve Uzun)
+- [ ] `STORE_LISTING.md` dosyasını düzenleyin (Title, Summary, Description)
+- [ ] Eklenti **Açıklaması** (Kısa ve Uzun) - `STORE_LISTING.md`'den kopyalayın
 - [ ] **Kategori** seçimi
 - [ ] **Dil** ayarları
 
@@ -1844,6 +1889,7 @@ echo "  ├── src/ (content.js, popup, options)"
 echo "  ├── icons/, images/"
 echo "  ├── package.sh, generate-icons.sh"
 echo "  ├── .gitignore, README.md"
+echo "  ├── STORE_LISTING.md    (Mağaza listeleme bilgileri)"
 echo "  └── ${CYAN}AI Context Dosyaları:${NC}"
 echo "      ├── AI_CONTEXT.md    (Proje yapısı ve API'ler)"
 echo "      ├── TECH_STACK.md    (Teknoloji stack)"
